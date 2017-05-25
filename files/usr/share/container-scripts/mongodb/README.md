@@ -1,8 +1,8 @@
 MongoDB Docker image
 ====================
 
-This repository contains Dockerfile for MongoDB image based on [baseruntime](""https://hub.docker.com/r/baseruntime/baseruntime/)
-and using MongoDB module. For more information about modules see official [Fedora Modularity documentation](docs.pagure.org/modularity/).
+This repository contains Dockerfiles for MongoDB images for general usage and OpenShift.
+Users can choose between RHEL and CentOS based images.
 
 Environment variables
 ---------------------------------
@@ -44,11 +44,12 @@ matches the user UID or name which is running inside the container.**
 Usage
 ---------------------------------
 
+For this, we will assume that you are using the `centos/mongodb-32-centos7` image.
 If you want to set only the mandatory environment variables and store the database
 in the `/home/user/database` directory on the host filesystem, execute the following command:
 
 ```
-$ docker run -d -e MONGODB_USER=<user> -e MONGODB_PASSWORD=<password> -e MONGODB_DATABASE=<database> -e MONGODB_ADMIN_PASSWORD=<admin_password> -v /home/user/database:/var/lib/mongodb/data modularitycontainers/mongodb
+$ docker run -d -e MONGODB_USER=<user> -e MONGODB_PASSWORD=<password> -e MONGODB_DATABASE=<database> -e MONGODB_ADMIN_PASSWORD=<admin_password> -v /home/user/database:/var/lib/mongodb/data centos/mongodb-32-centos7
 ```
 
 If you are initializing the database and it's the first time you are using the
@@ -87,12 +88,3 @@ the values stored in the variables and the actual passwords. Whenever a database
 container starts it will reset the passwords to the values stored in the
 environment variables.
 
-
-Test
-------------------
-This repository also provides tests (based on [MTF](https://pagure.io/modularity-testing-framework/tree/master)) which checks basic functionality of the MongoDB image.
-
-Run the tests using Makefile :
-```
-$ make test
-```

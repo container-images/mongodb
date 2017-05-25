@@ -1,0 +1,36 @@
+document: modularity-testing
+version: 1
+name: mongodb
+modulemd-url: 
+service:
+    port: 27017
+packages:
+    rpms:
+        - mongodb
+        - bind-utils 
+        - gettext 
+        - iproute 
+        - rsync 
+        - tar 
+        - findutils 
+        - python3 
+        - mongodb
+        - mongodb-server 
+        - mongo-tools
+testdependecies:
+    rpms:
+        - mongodb
+module:
+    docker:
+        start: "docker run -it -e MONGODB_USER=user -e MONGODB_PASSWORD=pas -e MONGODB_DATABASE=db -e MONGODB_ADMIN_PASSWORD=admin -p 27017:27017"
+        labels:
+            description: "MongoDB is a scalable, high-performance, open source NoSQL database."
+            io.k8s.description: "MongoDB is a scalable, high-performance, open source NoSQL database."
+        source: https://github.com/container-images/mongodb.git
+        container: 
+    rpm:
+        start: 
+        stop: 
+        status: 
+        repos:
+            - http://mirror.vutbr.cz/fedora/releases/26/Everything/x86_64/os/

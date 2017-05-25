@@ -1,0 +1,4 @@
+[mongodb]
+name=mongodb
+baseurl=https://kojipkgs.fedoraproject.org/repos/module-5dc18184b0a7c1f4-build/latest/x86_64/
+enabled=0

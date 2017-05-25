@@ -1,0 +1,120 @@
+.TH "mongodb" "1" "" "Rado Pitonak \<rpitonak@redhat.com\>" "DATE 25.05.2017"  ""
+
+
+.SH NAME
+.PP
+mongodb \- scalable, high\-performance, open source NoSQL database.
+
+
+.SH USAGE
+.PP
+To pull the MongoDB container use:
+
+.PP
+.RS
+
+.nf
+   docker pull modularitycontainers/mongodb
+
+.fi
+.RE
+
+.PP
+If you want to set only the mandatory environment variables and store the database
+in the \fB\fC/home/user/database\fR directory on the host filesystem, execute the following command:
+
+.PP
+.RS
+
+.nf
+  docker run \-d \-e MONGODB\_USER=<user> \-e MONGODB\_PASSWORD=<password> \-e MONGODB\_DATABASE=<database> \-e MONGODB\_ADMIN\_PASSWORD=<admin\_password> \-v /home/user/database:/var/lib/mongodb/data modularitycontainers/mongodb
+
+.fi
+.RE
+
+.PP
+If you are initializing the database and it's the first time you are using the
+specified shared volume, the database will be created with two users: \fB\fCadmin\fR and \fB\fCMONGODB\_USER\fR. After that the MongoDB daemon
+will be started. If you are re\-attaching the volume to another container, the
+creation of the database user and admin user will be skipped and only the
+MongoDB daemon will be started.
+
+
+.SH ENVIROMENT VARIABLES
+.PP
+The image recognizes the following environment variables that you can set during
+initialization by passing \fB\fC\-e VAR=VALUE\fR to the Docker run command.
+
+.PP
+\fB\fCMONGODB\_ADMIN\_PASSWORD\fR
+  Password for the admin user
+
+.PP
+Optionally you can provide settings for user with 'readWrite' role.
+
+.PP
+\fB\fCMONGODB\_USER\fR
+  User name for MONGODB account to be created
+\fB\fCMONGODB\_PASSWORD\fR
+.br
+  Password for the user account
+.br
+\fB\fCMONGODB\_DATABASE\fR
+.br
+  Database name
+
+.PP
+The following environment variables influence the MongoDB configuration file. They are all optional.
+
+.PP
+\fB\fCMONGODB\_QUIET\fR
+.br
+  Runs MongoDB in a quiet mode that attempts to limit the amount of output.
+  Default: true
+
+
+.SH VOLUMES
+.PP
+You can also set the following mount points by passing the \fB\fC\-v /host:/container\fR flag to Docker.
+
+.PP
+\fB\fCVolume mount point\fR
+  \fB\fC/var/lib/mongodb/data\fR\- MongoDB data directory
+
+.PP
+\fBNotice: When mouting a directory from the host into the container, ensure that the mounted
+directory has the appropriate permissions and that the owner and group of the directory
+matches the user UID or name which is running inside the container.\fP
+
+
+.SH CONFIGURATION
+.PP
+It is allowed to use custom configuration file for mongod server. Providing a custom configuration file supercedes the individual configuration environment variable values.
+
+.PP
+To use custom configuration file in container it has to be mounted into \fB\fC/etc/mongod.conf\fR. For example to use configuration file stored in \fB\fC/home/user\fR directory use this option for \fB\fCdocker run\fR command: \fB\fC\-v /home/user/mongod.conf:/etc/mongod.conf:Z\fR.
+
+.PP
+\fBNotice: Custom config file does not affect name of replica set. It has to be set in \fB\fCMONGODB\_REPLICA\_NAME\fR environment variable.\fP
+
+
+.SH ADMIN USER
+.PP
+The admin user name is set to \fB\fCadmin\fR and you have to to specify the password by
+setting the \fB\fCMONGODB\_ADMIN\_PASSWORD\fR environment variable. This process is done
+upon database initialization.
+
+
+.SH CHANGING PASSWORD
+.PP
+Since passwords are part of the image configuration, the only supported method
+to change passwords for the database user (\fB\fCMONGODB\_USER\fR) and admin user is by
+changing the environment variables \fB\fCMONGODB\_PASSWORD\fR and
+\fB\fCMONGODB\_ADMIN\_PASSWORD\fR, respectively.
+
+.PP
+Changing database passwords directly in MongoDB will cause a mismatch between
+the values stored in the variables and the actual passwords. Whenever a database
+container starts it will reset the passwords to the values stored in the
+environment variables.
+
