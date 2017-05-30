@@ -42,10 +42,11 @@ LABEL summary="MongoDB, NoSQL database." \
 # fedora - fedora 26 repo for other packeges
 COPY repos/* /etc/yum.repos.d/
 
+
 # TODO remove hack with sed
 RUN sed -i 's|/jkaluza/|/ralph/|g' /etc/yum.repos.d/build.repo && \
     INSTALL_PKGS="bind-utils gettext iproute rsync tar findutils python3 mongo-tools" && \
-    microdnf --nodocs --enablerepo mongodb install -y mongodb mongodb-server&& \
+    microdnf --nodocs --enablerepo mongodb install -y mongodb mongodb-server && \
     microdnf --nodocs --enablerepo fedora install -y $INSTALL_PKGS && \
     microdnf clean all
 
