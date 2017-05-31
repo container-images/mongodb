@@ -24,10 +24,21 @@ module:
     docker:
         start: "docker run -it -e MONGODB_USER=user -e MONGODB_PASSWORD=pas -e MONGODB_DATABASE=db -e MONGODB_ADMIN_PASSWORD=admin -p 27017:27017"
         labels:
+            summary: "MongoDB, NoSQL database."
+            version: "0"
+            architecture: "x86_64"
             description: "MongoDB is a scalable, high-performance, open source NoSQL database."
+            vendor: "Fedora Project"
+            com.redhat.component: "mongodb"
+            usage: "docker run -e MONGODB_USER=<user_name> -e MONGODB_PASSWORD=<password> -e MONGODB_DATABASE=<db_name> -e MONGODB_ADMIN_PASSWORD=<admin_password> -p 27017:27017 mongodb"
+            org.fedoraproject.component: "mongodb"
+            authoritative-source-url: "registry.fedoraproject.org"
             io.k8s.description: "MongoDB is a scalable, high-performance, open source NoSQL database."
+            io.k8s.display-name: "MongoDB 3.4.3"
+            io.openshift.tags: "mongodb, db, database, nosql"
+            io.openshift.expose-services: "27017"
         source: https://github.com/container-images/mongodb.git
-        container: 
+        container: modularitycontainers/mongodb
     rpm:
         start: 
         stop: 

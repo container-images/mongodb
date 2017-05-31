@@ -56,11 +56,11 @@ class DBCheck(module_framework.AvocadoTest):
         """
 
         self.start()
-        time.sleep(3)
+        time.sleep(5)
 
         # mongo db queries stored in dictionary, written in order which they are called
-        queries = {"insert1": "db.testData.insert({ y : 1 });",
-                   "insert2": "db.testData.insert({ z : 2 });",
+        queries = {"insert1": "db.testData.insert({{ y : 1 }});",
+                   "insert2": "db.testData.insert({{ z : 2 }});",
                    "print_json": "db.testData.find().forEach(printjson);",
                    "count": "db.testData.count();",
                    "data_drop": "db.testData.drop();",
@@ -78,13 +78,13 @@ class DBCheck(module_framework.AvocadoTest):
         Testing privileges for admin user 
         """
         self.start()
-        time.sleep(3)
+        time.sleep(5)
 
         # mongo db queries stored in dictionary, written in order which they are called
-        queries = {"dropUser": "db=db.getSiblingDB('${MONGODB_DATABASE}');db.dropUser('${MONGODB_USER}');",
-                   "createUser1": "db=db.getSiblingDB('${MONGODB_DATABASE}'); db.createUser({user:'${MONGODB_USER}',pwd:'${MONGODB_PASSWORD}',roles:['readWrite','userAdmin','dbAdmin']});",
-                   "insert": "db=db.getSiblingDB('${MONGODB_DATABASE}');db.testData.insert({x:0});",
-                   "createUser2": "db.createUser({user:'test_user2',pwd:'test_password2',roles:['readWrite']});"}
+        queries = {"dropUser": "db=db.getSiblingDB('${{MONGODB_DATABASE}}');db.dropUser('${{MONGODB_USER}}');",
+                   "createUser1": "db=db.getSiblingDB('${{MONGODB_DATABASE}}'); db.createUser({{user:'${{MONGODB_USER}}',pwd:'${{MONGODB_PASSWORD}}',roles:['readWrite','userAdmin','dbAdmin']}});",
+                   "insert": "db=db.getSiblingDB('${{MONGODB_DATABASE}}');db.testData.insert({{x:0}});",
+                   "createUser2": "db.createUser({{user:'test_user2',pwd:'test_password2',roles:['readWrite']}});"}
 
         self.run('{} --eval "{}"'.format(self.MONGO_ADMIN_CMD, queries["dropUser"]))
         self.run('{} --eval "{}"'.format(self.MONGO_ADMIN_CMD, queries["createUser1"]))
