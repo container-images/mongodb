@@ -1,4 +1,6 @@
 FROM baseruntime/baseruntime:latest
+
+ENV NAME=mongodb \
     ARCH=x86_64 \
     VERSION=0 \
     RELEASE=1 \
