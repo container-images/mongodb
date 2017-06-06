@@ -1,25 +1,8 @@
 FROM baseruntime/baseruntime:latest
-
-# Volumes:
-#  * /var/lib/mongodb/data - MongoDB data directory
-# Environment:
-#  * $MONGODB_ADMIN_PASSWORD - Password for the admin user
-#  * $MONGODB_USER - User name for MONGODB account to be created
-#  * $MONGODB_PASSWORD - Password for the user account
-#  * $MONGODB_DATABASE- Database name
-# Configuration (optional):
-#  * $MONGODB_QUIET - Runs MongoDB in a quiet mode that attempts to limit the amount of output.
-#                   - default: true
-# Exposed ports:
-# * 27017 - Default port for MongoDB
-
-
-ENV NAME=mongodb \
     ARCH=x86_64 \
     VERSION=0 \
     RELEASE=1 \
     MONGODB_VERSION="3.4.3"
-
 
 LABEL MAINTAINER "Matus Kocka" <mkocka@redhat.com>
 LABEL summary="MongoDB, NoSQL database." \
@@ -38,16 +21,11 @@ LABEL summary="MongoDB, NoSQL database." \
       io.openshift.tags="mongodb, db, database, nosql" \
       io.openshift.expose-services="27017"
 
-# mongodb - repo contains link to actual build of MongoDB module
-# fedora - fedora 26 repo for other packeges
-COPY repos/* /etc/yum.repos.d/
+#removed mongo-tools from $INSTALL_PKGS
 
-
-# TODO remove hack with sed
-RUN sed -i 's|/jkaluza/|/ralph/|g' /etc/yum.repos.d/build.repo && \
-    INSTALL_PKGS="bind-utils gettext iproute rsync tar findutils python3 mongo-tools" && \
-    microdnf --nodocs --enablerepo mongodb install -y mongodb mongodb-server && \
-    microdnf --nodocs --enablerepo fedora install -y $INSTALL_PKGS && \
+RUN INSTALL_PKGS="bind-utils gettext iproute rsync tar findutils python3" && \
+    microdnf --nodocs  install -y mongodb mongodb-server && \
+    microdnf --nodocs  install -y $INSTALL_PKGS && \
     microdnf clean all
 
 # Set paths to avoid hard-coding them in scripts.
@@ -58,7 +36,6 @@ ADD files /
 
 # Add help file
 COPY root /
-
 
 EXPOSE 27017
 
