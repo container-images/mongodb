@@ -1,6 +1,0 @@
-[mongodb]
-name=mongodb
-baseurl=https://kojipkgs.fedoraproject.org/compose/latest-Fedora-Modular-26/compose/Server/x86_64/os/
-enabled=0
-gpgcheck=false
-modules=1
