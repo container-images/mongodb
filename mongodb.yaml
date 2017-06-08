@@ -1,4 +1,3 @@
-#I hope all deps are right
 document: modulemd
 version: 1
 data:
@@ -21,7 +20,6 @@ data:
         buildrequires:
             bootstrap: f26
             common-build-dependencies: f26
-#           shared-userspace: f26
             perl: f26
         requires:
             base-runtime: f26
@@ -35,9 +33,11 @@ data:
         default:
             rpms:
                 - mongodb
+                - mongodb-server
     api:
         rpms:
                 - mongodb
+                - mongodb-server
     components:
         rpms:
             mongodb:
