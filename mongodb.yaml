@@ -52,12 +52,11 @@ data:
                 rationale: MongoDB dependency.
                 ref: f26
                 buildorder: 9
-            asio:
-                rationale: MongoDB dependency.
-                ref: f26
-                buildorder: 7
-            mozjs45:
-                rationale: MongoDB dependency.
-                ref: f26 
-                buildorder: 1
-
+#           asio:
+#               rationale: MongoDB dependency.
+#               ref: f26
+#               buildorder: 7
+#           mozjs45:
+#               rationale: MongoDB dependency.
+#               ref: f26 
+#               buildorder: 1
