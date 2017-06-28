@@ -23,13 +23,13 @@ LABEL summary="MongoDB, NoSQL database." \
       io.openshift.tags="mongodb, db, database, nosql" \
       io.openshift.expose-services="27017"
 
-#removed mongo-tools from $INSTALL_PKGS
+RUN dnf install -y --rpm --nodocs policycoreutils bind-utils iproute rsync tar findutils python3 && dnf clean all && \
+    dnf install -y --nodocs mongodb && dnf clean all   
 
-RUN INSTALL_PKGS="bind-utils gettext iproute rsync tar findutils python3" && \
-    microdnf --nodocs  install -y mongodb mongodb-server && \
-    microdnf --nodocs  install -y $INSTALL_PKGS && \
-    microdnf clean all
-
+#RUN INSTALL_PKGS="bind-utils gettext iproute rsync tar findutils python3" && \
+#   microdnf --nodocs  install -y mongodb mongodb-server && \
+#   microdnf --nodocs  install -y $INSTALL_PKGS && \
+#   microdnf clean all
 # Set paths to avoid hard-coding them in scripts.
 ENV HOME=/var/lib/mongodb \
     CONTAINER_SCRIPTS_PATH=/usr/share/container-scripts/mongodb
