@@ -1,4 +1,4 @@
-FROM baseruntime/baseruntime:latest
+FROM modularitycontainers/boltron-preview:latest
 
 ENV NAME=mongodb \
     ARCH=x86_64 \
@@ -26,10 +26,6 @@ LABEL summary="MongoDB, NoSQL database." \
 RUN dnf install -y --rpm --nodocs mongodb-server policycoreutils bind-utils iproute rsync tar findutils python3 && dnf clean all && \
     dnf install -y --nodocs mongodb && dnf clean all   
 
-#RUN INSTALL_PKGS="bind-utils gettext iproute rsync tar findutils python3" && \
-#   microdnf --nodocs  install -y mongodb mongodb-server && \
-#   microdnf --nodocs  install -y $INSTALL_PKGS && \
-#   microdnf clean all
 # Set paths to avoid hard-coding them in scripts.
 ENV HOME=/var/lib/mongodb \
     CONTAINER_SCRIPTS_PATH=/usr/share/container-scripts/mongodb
