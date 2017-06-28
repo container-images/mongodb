@@ -23,7 +23,7 @@ LABEL summary="MongoDB, NoSQL database." \
       io.openshift.tags="mongodb, db, database, nosql" \
       io.openshift.expose-services="27017"
 
-RUN dnf install -y --rpm --nodocs policycoreutils bind-utils iproute rsync tar findutils python3 && dnf clean all && \
+RUN dnf install -y --rpm --nodocs mongo-server policycoreutils bind-utils iproute rsync tar findutils python3 && dnf clean all && \
     dnf install -y --nodocs mongodb && dnf clean all   
 
 #RUN INSTALL_PKGS="bind-utils gettext iproute rsync tar findutils python3" && \
