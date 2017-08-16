@@ -1,7 +1,7 @@
 document: modularity-testing
 version: 1
 name: mongodb
-modulemd-url: 
+modulemd-url: https://src.fedoraproject.org/modules/mongodb/raw/master/f/mongodb.yaml
 service:
     port: 27017
 packages:
