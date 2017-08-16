@@ -22,7 +22,7 @@ testdependecies:
         - mongodb
 module:
     docker:
-        start: "docker run -it -e MONGODB_USER=user -e MONGODB_PASSWORD=pas -e MONGODB_DATABASE=db -e MONGODB_ADMIN_PASSWORD=admin -p 27017:27017"
+        start: "docker run -it --rm -e MONGODB_USER=user -e MONGODB_PASSWORD=pas -e MONGODB_DATABASE=db -e MONGODB_ADMIN_PASSWORD=admin -p 27017:27017"
         labels:
             summary: "MongoDB, NoSQL database."
             version: "0"
