@@ -1,4 +1,4 @@
-IMAGE_NAME = mongodb
+IMAGE_NAME = modularitycontainers/mongodb
 
 MODULEMDURL=file://mongodb.yaml
 
