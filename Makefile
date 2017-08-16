@@ -2,7 +2,7 @@ IMAGE_NAME = modularitycontainers/mongodb
 
 MODULEMDURL=file://mongodb.yaml
 
-default: run 
+default: run
 
 build:
 	docker build --tag=$(IMAGE_NAME) .

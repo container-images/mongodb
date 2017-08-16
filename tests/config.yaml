@@ -7,16 +7,16 @@ service:
 packages:
     rpms:
         - mongodb
-        - bind-utils 
-        - gettext 
-        - iproute 
-        - rsync 
-        - tar 
-        - findutils 
-        - python3 
+        - bind-utils
+        - gettext
+        - iproute
+        - rsync
+        - tar
+        - findutils
+        - python3
         - mongodb
-        - mongodb-server 
         - mongo-tools
+        - mongodb-server
 testdependecies:
     rpms:
         - mongodb
@@ -40,8 +40,8 @@ module:
         source: https://github.com/container-images/mongodb.git
         container: modularitycontainers/mongodb
     rpm:
-        start: 
-        stop: 
-        status: 
+        start:
+        stop:
+        status:
         repos:
             - http://mirror.vutbr.cz/fedora/releases/26/Everything/x86_64/os/
