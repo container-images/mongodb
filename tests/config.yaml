@@ -15,8 +15,8 @@ packages:
         - findutils
         - python3
         - mongodb
-        - mongo-tools
         - mongodb-server
+        # - mongo-tools  # not present in modular release
 testdependecies:
     rpms:
         - mongodb
