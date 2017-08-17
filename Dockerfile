@@ -1,4 +1,4 @@
-FROM modularitycontainers/boltron-preview:latest
+FROM registry.fedoraproject.org/f26-modular/boltron
 
 ENV NAME=mongodb \
     ARCH=x86_64 \
@@ -23,8 +23,8 @@ LABEL summary="MongoDB, NoSQL database." \
       io.openshift.tags="mongodb, db, database, nosql" \
       io.openshift.expose-services="27017"
 
-RUN dnf install -y --rpm --nodocs policycoreutils bind-utils iproute rsync tar findutils python3 && dnf clean all && \
-    dnf install -y --nodocs mongodb && dnf clean all   
+RUN dnf install -y --rpm --nodocs gettext policycoreutils bind-utils iproute rsync tar findutils python3 && dnf clean all && \
+    dnf install -y --nodocs mongodb && dnf clean all
 
 # Set paths to avoid hard-coding them in scripts.
 ENV HOME=/var/lib/mongodb \
@@ -40,7 +40,7 @@ EXPOSE 27017
 CMD ["/usr/bin/run-mongod"]
 
 # Container setup from scl
-RUN : > /etc/mongod.conf && \
+RUN touch /etc/mongod.conf && \
     mkdir -p ${HOME}/data && \
     # Set owner 'mongodb:0' and 'g+rw(x)' permission - to avoid problems running container with arbitrary UID
     /usr/libexec/fix-permissions /etc/mongod.conf ${CONTAINER_SCRIPTS_PATH}/mongodb.conf.template \

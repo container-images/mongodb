@@ -1,28 +1,28 @@
 document: modularity-testing
 version: 1
 name: mongodb
-modulemd-url: 
+modulemd-url: https://src.fedoraproject.org/modules/mongodb/raw/master/f/mongodb.yaml
 service:
     port: 27017
 packages:
     rpms:
         - mongodb
-        - bind-utils 
-        - gettext 
-        - iproute 
-        - rsync 
-        - tar 
-        - findutils 
-        - python3 
+        - bind-utils
+        - gettext
+        - iproute
+        - rsync
+        - tar
+        - findutils
+        - python3
         - mongodb
-        - mongodb-server 
-        - mongo-tools
+        - mongodb-server
+        # - mongo-tools  # not present in modular release
 testdependecies:
     rpms:
         - mongodb
 module:
     docker:
-        start: "docker run -it -e MONGODB_USER=user -e MONGODB_PASSWORD=pas -e MONGODB_DATABASE=db -e MONGODB_ADMIN_PASSWORD=admin -p 27017:27017"
+        start: "docker run -it --rm -e MONGODB_USER=user -e MONGODB_PASSWORD=pas -e MONGODB_DATABASE=db -e MONGODB_ADMIN_PASSWORD=admin -p 27017:27017"
         labels:
             summary: "MongoDB, NoSQL database."
             version: "0"
@@ -40,8 +40,8 @@ module:
         source: https://github.com/container-images/mongodb.git
         container: modularitycontainers/mongodb
     rpm:
-        start: 
-        stop: 
-        status: 
+        start:
+        stop:
+        status:
         repos:
             - http://mirror.vutbr.cz/fedora/releases/26/Everything/x86_64/os/
