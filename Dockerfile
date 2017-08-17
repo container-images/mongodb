@@ -40,7 +40,7 @@ EXPOSE 27017
 CMD ["/usr/bin/run-mongod"]
 
 # Container setup from scl
-RUN : > /etc/mongod.conf && \
+RUN touch /etc/mongod.conf && \
     mkdir -p ${HOME}/data && \
     # Set owner 'mongodb:0' and 'g+rw(x)' permission - to avoid problems running container with arbitrary UID
     /usr/libexec/fix-permissions /etc/mongod.conf ${CONTAINER_SCRIPTS_PATH}/mongodb.conf.template \
